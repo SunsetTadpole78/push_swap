@@ -19,7 +19,7 @@ $(PUSH_SWAP): $(OBJS) $(LIBFT)
 	cc $(FLAGS) $(OBJS) -o $(PUSH_SWAP) -I $(INCLUDE)
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR) bonus
 
 %.o: %.c
 	cc $(FLAGS) $< -c -o $@ -I $(INCLUDE)
