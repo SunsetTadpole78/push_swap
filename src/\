@@ -1,0 +1,168 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solver.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lroussel <lroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/10 16:21:43 by lroussel          #+#    #+#             */
+/*   Updated: 2024/12/11 11:35:25 by lroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+int	is_solved(t_game *game, int start, int end_offset)
+{
+	t_list	*cur;
+	int	last;
+	int	size;
+	
+	if (end_offset < 0 || start < 0)
+		return (0);
+	if (!game->a)
+		return (1);
+	if (game->b)
+		return (0);
+	size = ft_lstsize(game->a) - start - end_offset - 1;
+	if (size < 0)
+		return (0);
+	if (game->a)
+	{
+		cur = game->a;
+		while (start != 0 && cur->next)
+		{
+			cur = cur->next;
+			start--;
+		}
+		last = *((int *)cur->content);
+		cur = cur->next;
+		while (size && cur)
+		{
+			if (*((int *)cur->content) < last)
+				return (0);
+			last = *((int *)cur->content);
+			cur = cur->next;
+			size--;
+		}
+		printf("\n");
+
+	}
+	return (1);
+}
+
+int	fmax(t_list *list)
+{
+	int	max;
+	t_list	*cur;
+
+	max = *((int *)list->content);
+	cur = list->next;
+	while (cur)
+	{
+		if (*((int *)list->content) > max)
+			max = *((int *)list->content);
+		cur = cur->next;
+	}
+	return (max);
+}
+
+int	fmin(t_list *list)
+{
+	int	min;
+	t_list	*cur;
+
+	max = *((int *)list->content);
+	cur = list->next;
+	while (cur)
+	{
+		if (*((int *)list->content) < min)
+			min = *((int *)list->content);
+		cur = cur->next;
+	}
+	return (min);
+}
+
+int	min_element_index(t_list *list)
+{
+	int	min;
+	int	min_index;
+	int	index;
+	t_list	*cur;
+
+	min = *((int *)list->content);
+	index = 0;
+	cur = list->next;
+	while (cur)
+	{
+		if (min > *((int *)cur->content))
+		{
+			min_index = index;
+			min = *((int *)cur->content);
+		}
+		cur = cur->next;
+		index++;
+	}
+	return (min_index);
+}
+
+void	simply_rotate(t_game *game)
+{
+	if (min_element_index(game->a) < (ft_lstsize(game->a) / 2))
+	{
+		while (!is_solved(game, 0, 0) && *((int *)game->a->content) > *((int *)ft_lstlast(game->a)->content))
+			ra(game);
+	} else {
+		while (!is_solved(game, 0, 0) && *((int *)ft_lstlast(game->a)->content) < *((int *)game->a->content))
+			rra(game);
+	}
+}
+
+void	check_simply_fix(t_game *game)
+{
+	if (is_solved(game, 1, 0))
+		ra(game);
+	else if (is_solved(game, 0, 1))
+		rra(game);
+}
+
+int	calc_min_moves(t_game *game)
+{
+	if (*((int *)game->a->content) == fmin(game->b))
+	{
+		
+	}
+}
+
+void	solve(t_game *game)
+{
+	if (is_solved(game, 0, 0))
+		return ;
+	if (ft_lstsize(game->a) == 2)
+	{
+		ra(game, 1);
+		return ;
+	}
+	if (ft_lstsize(game->a) == 3)
+	{
+		while (!is_solved(game, 0, 0))
+		{
+			if (*((int *)game->a->content) > *((int *)game->a->next->next->content))
+			{
+				if (*((int *)game->a->content) > *((int *)game->a->next->content))
+					ra(game, 1);
+				else
+					rra(game, 1);
+			}
+			if (*((int *)game->a->content) > *((int *)game->a->next->content))
+				sa(game, 1);
+			if (*((int *)game->a->next->content) > *((int *)game->a->next->next->content))
+					rra(game, 1);
+		}
+		return ;
+	}
+	pb(game, 1);
+	pb(game, 1);
+	calc_min_moves(game);
+	simply_rotate(game);
+}

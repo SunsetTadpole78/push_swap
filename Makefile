@@ -4,7 +4,9 @@ INCLUDE = include
 PUSH_SWAP = push_swap
 
 DEFAULT = push_swap.c	\
-	  pile_parser.c
+	  pile_parser.c	\
+	  move.c	\
+	  solver.c
 
 FILES = $(addprefix $(SRC)/, $(DEFAULT))
 OBJS = $(FILES:%.c=%.o)
