@@ -12,7 +12,7 @@
 
 #include "../tester.h"
 
-int	test_rrotate(t_game *before, t_game *after, void *action)
+static int	test_rrotate(t_game *before, t_game *after, void *action)
 {
 	if (action == rra)
 	{
