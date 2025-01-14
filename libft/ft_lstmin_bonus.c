@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_words.c                                   :+:      :+:    :+:   */
+/*   ft_lstmin_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lroussel <lroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 11:27:46 by lroussel          #+#    #+#             */
-/*   Updated: 2025/01/09 17:24:44 by lroussel         ###   ########.fr       */
+/*   Created: 2025/01/09 10:50:06 by lroussel          #+#    #+#             */
+/*   Updated: 2025/01/09 10:54:09 by lroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned int	ft_count_words(char const *s, char c)
+int	ft_lstmin(t_list *list)
 {
-	unsigned int	count;
-	int				in_word;
+	int		min;
+	t_list	*cur;
 
-	count = 0;
-	in_word = 0;
-	while (*s)
+	min = *((int *)list->content);
+	cur = list->next;
+	while (cur)
 	{
-		if (*s != c && !in_word)
-		{
-			in_word = 1;
-			count++;
-		}
-		else if (*s == c)
-			in_word = 0;
-		s++;
+		if (*((int *)cur->content) < min)
+			min = *((int *)cur->content);
+		cur = cur->next;
 	}
-	return (count);
+	return (min);
 }

@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_words.c                                   :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lroussel <lroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 11:27:46 by lroussel          #+#    #+#             */
-/*   Updated: 2025/01/09 17:24:44 by lroussel         ###   ########.fr       */
+/*   Created: 2025/01/13 10:34:08 by lroussel          #+#    #+#             */
+/*   Updated: 2025/01/13 13:16:18 by lroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef CHECKER_H
+# define CHECKER_H
 
-unsigned int	ft_count_words(char const *s, char c)
-{
-	unsigned int	count;
-	int				in_word;
+# include <stdlib.h>
+# include <unistd.h>
+# include "push_swap.h"
 
-	count = 0;
-	in_word = 0;
-	while (*s)
-	{
-		if (*s != c && !in_word)
-		{
-			in_word = 1;
-			count++;
-		}
-		else if (*s == c)
-			in_word = 0;
-		s++;
-	}
-	return (count);
-}
+#endif

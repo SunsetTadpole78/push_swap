@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_words.c                                   :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lroussel <lroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 11:27:46 by lroussel          #+#    #+#             */
-/*   Updated: 2025/01/09 17:24:44 by lroussel         ###   ########.fr       */
+/*   Created: 2025/01/13 15:45:36 by lroussel          #+#    #+#             */
+/*   Updated: 2025/01/13 15:45:44 by lroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned int	ft_count_words(char const *s, char c)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	unsigned int	count;
-	int				in_word;
+	void	*temp;
 
-	count = 0;
-	in_word = 0;
-	while (*s)
+	if (!new_size)
+		new_size = 1;
+	temp = malloc(new_size);
+	if (!temp)
+		return (NULL);
+	if (ptr)
 	{
-		if (*s != c && !in_word)
-		{
-			in_word = 1;
-			count++;
-		}
-		else if (*s == c)
-			in_word = 0;
-		s++;
+		if (old_size < new_size)
+			new_size = old_size;
+		ft_memcpy(temp, ptr, new_size);
+		free(ptr);
 	}
-	return (count);
+	return (temp);
 }

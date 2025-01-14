@@ -6,13 +6,13 @@
 /*   By: lroussel <lroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 10:59:09 by lroussel          #+#    #+#             */
-/*   Updated: 2024/11/07 18:37:38 by lroussel         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:33:36 by lroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	free_all(char **splited, unsigned int max)
+static char	**free_all(char **splited, unsigned int max)
 {
 	unsigned int	i;
 
@@ -23,19 +23,17 @@ static void	free_all(char **splited, unsigned int max)
 		i++;
 	}
 	free(splited);
+	return (NULL);
 }
 
-static char	*split_next_word(char const *s, char c, char ***res, unsigned int p)
+static char	*get_word(char const *s, int start, char c)
 {
-	char	*word;
+	int		end;
 
-	word = ft_get_first_word(s, &c);
-	if (!word)
-	{
-		free_all(*res, p);
-		return (NULL);
-	}
-	return (word);
+	end = start;
+	while (s[end] && s[end] != c)
+		end++;
+	return (ft_substr(s, start, end - start));
 }
 
 char	**ft_split(char const *s, char c)
@@ -44,20 +42,20 @@ char	**ft_split(char const *s, char c)
 	unsigned int	i;
 	unsigned int	j;
 
-	res = malloc(sizeof(char *) * (ft_count_words(s, &c) + 1));
+	res = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
 	if (!res)
 		return (NULL);
 	i = 0;
 	j = 0;
 	while (i < ft_strlen(s))
 	{
-		while (ft_strchr(&c, s[i]))
+		while (c == s[i])
 			i++;
 		if (i < ft_strlen(s))
 		{
-			res[j] = split_next_word(s + i, c, &res, j);
+			res[j] = get_word(s, i, c);
 			if (!res[j])
-				return (NULL);
+				return (free_all(res, j));
 			i += ft_strlen(res[j]) + 1;
 			j++;
 		}

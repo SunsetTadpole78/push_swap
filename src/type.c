@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_words.c                                   :+:      :+:    :+:   */
+/*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lroussel <lroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 11:27:46 by lroussel          #+#    #+#             */
-/*   Updated: 2025/01/09 17:24:44 by lroussel         ###   ########.fr       */
+/*   Created: 2025/01/13 09:43:26 by lroussel          #+#    #+#             */
+/*   Updated: 2025/01/13 09:43:27 by lroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-unsigned int	ft_count_words(char const *s, char c)
+static int	type(int v)
 {
-	unsigned int	count;
-	int				in_word;
+	static int	t = P_SWAP;
 
-	count = 0;
-	in_word = 0;
-	while (*s)
+	if (v != -1)
+		t = v;
+	return (t);
+}
+
+void	set_type(int t)
+{
+	if (t < P_SWAP || t > UNIT_TESTS)
 	{
-		if (*s != c && !in_word)
-		{
-			in_word = 1;
-			count++;
-		}
-		else if (*s == c)
-			in_word = 0;
-		s++;
+		ft_putstr_fd("Error: Invalid type id\n", 2);
+		exit(EXIT_FAILURE);
 	}
-	return (count);
+	type(t);
+}
+
+int	get_type(void)
+{
+	return (type(-1));
 }

@@ -6,7 +6,7 @@
 /*   By: lroussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:35:19 by lroussel          #+#    #+#             */
-/*   Updated: 2024/11/08 11:09:26 by lroussel         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:46:28 by lroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void			*ft_memcpy(void *dest, const void *src, size_t n);
 void			*ft_memmove(void *dest, const void *src, size_t n);
 void			*ft_memset(void *s, int c, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);
+void			*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 int				ft_atoi(const char *nptr);
 int				ft_islower(int c);
@@ -41,6 +42,7 @@ int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
+int				ft_isdigit_str(char *str);
 int				ft_isprint(int c);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -48,7 +50,7 @@ int				ft_tolower(int c);
 int				ft_toupper(int c);
 
 unsigned int	ft_count_digits(int n);
-unsigned int	ft_count_words(char const *s, char const *charset);
+unsigned int	ft_count_words(char const *s, char c);
 
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
@@ -82,6 +84,8 @@ void			ft_lstdelone(t_list *lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 
 int				ft_lstsize(t_list *lst);
+int				ft_lstmax(t_list *list);
+int				ft_lstmin(t_list *list);
 
 t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void*));
