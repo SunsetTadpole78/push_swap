@@ -67,10 +67,10 @@ void	move_to_insert_position(t_game *game, int v)
 {
 	int	index;
 
-	index = get_index(game->a, v);
+	index = find_insert_position(game->a, v);
 	while (!(val(ft_lstlast(game->a)) < v && v < val(game->a)))
 	{
-		if (index < (ft_lstsize(game->a) / 2))
+		if (index <= (ft_lstsize(game->a) / 2))
 			ra(game);
 		else
 			rra(game);

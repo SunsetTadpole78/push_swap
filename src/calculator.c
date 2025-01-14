@@ -87,6 +87,9 @@ int	calc_cost(t_game *game, int v)
 	moves_b = calc_moves_b(game, v, &sb);
 	moves = adjust_moves(moves_a, moves_b, sa, sb);
 	if (v < ft_lstmin(game->b) || v > ft_lstmax(game->b))
-		return (moves + (v < ft_lstmin(game->b)) + 1);
+	{
+		return (moves + (v < ft_lstmin(game->b) && ft_lstsize(game->a) > 4)
+			+ 1);
+	}
 	return (moves + 1);
 }
