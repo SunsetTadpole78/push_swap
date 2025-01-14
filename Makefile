@@ -74,26 +74,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 UNIT_TESTS_INCLUDE_DIR = tests
 
 all: $(PUSH_SWAP)
-	@echo $(SEPARATOR)
-	@echo "${GREEN}${CHECK} All targets are up to date!${CLEAR}"
 
-
-$(PUSH_SWAP): $(OBJS) $(LIBFT)
-	@echo $(SEPARATOR)
-	@echo "${ORANGE}${ARROW} Compiling ${YELLOW}${PUSH_SWAP}${ORANGE}...${CLEAR}"
-	cc $(FLAGS) $(OBJS) -o $(PUSH_SWAP) $(LIBFT) -I $(INCLUDE) -I $(LIBFT_INCLUDE_DIR)
-	@echo "${GREEN}${CHECK} ${YELLOW}${PUSH_SWAP}${GREEN} compiled successfully!${CLEAR}"
-
-$(LIBFT):
-	@echo $(SEPARATOR)
-	@echo "${MAGENTA}${INFO} Building ${YELLOW}${LIBFT}${MAGENTA}...${CLEAR}"
-	make -C $(LIBFT_DIR) bonus > /dev/null
-	@echo "${GREEN}${CHECK} ${YELLOW}${LIBFT}${GREEN} built successfully!${CLEAR}"
-
-%.o: %.c
-	@echo $(SEPARATOR)
-	@echo "${ORANGE}${ARROW} Compiling ${YELLOW}$@${ORANGE}...${CLEAR}"
-	cc $(FLAGS) $< -c -o $@ -I $(INCLUDE) -I $(LIBFT_INCLUDE_DIR)
+bonus: $(CHECKER)
 
 clean:
 	@echo $(SEPARATOR)
@@ -109,12 +91,35 @@ fclean: clean
 	rm -f $(PUSH_SWAP) $(CHECKER) $(UNIT_TESTS)
 	@echo "${GREEN}${CHECK} All executables and libraries removed successfully!${CLEAR}"
 
+%.o: %.c
+	@echo $(SEPARATOR)
+	@echo "${ORANGE}${ARROW} Compiling ${YELLOW}$@${ORANGE}...${CLEAR}"
+	cc $(FLAGS) $< -c -o $@ -I $(INCLUDE) -I $(LIBFT_INCLUDE_DIR)
+
+$(PUSH_SWAP): $(OBJS) $(LIBFT)
+	@echo $(SEPARATOR)
+	@echo "${ORANGE}${ARROW} Compiling ${YELLOW}${PUSH_SWAP}${ORANGE}...${CLEAR}"
+	cc $(FLAGS) $(OBJS) -o $(PUSH_SWAP) $(LIBFT) -I $(INCLUDE) -I $(LIBFT_INCLUDE_DIR)
+	@echo "${GREEN}${CHECK} ${YELLOW}${PUSH_SWAP}${GREEN} compiled successfully!${CLEAR}"
+	@echo $(SEPARATOR)
+	@echo "${GREEN}${CHECK} All targets are up to date!${CLEAR}"
+
+$(LIBFT):
+	@echo $(SEPARATOR)
+	@echo "${MAGENTA}${INFO} Building ${YELLOW}${LIBFT}${MAGENTA}...${CLEAR}"
+	make -C $(LIBFT_DIR) bonus > /dev/null
+	@echo "${GREEN}${CHECK} ${YELLOW}${LIBFT}${GREEN} built successfully!${CLEAR}"
 
 $(UNIT_TESTS): $(OBJS_TESTS) $(LIBFT)
+	@echo "${ORANGE}${ARROW} Compiling ${YELLOW}${UNIT_TESTS}${ORANGE}...${CLEAR}"
 	cc $(FLAGS) $(OBJS_TESTS) -o $(UNIT_TESTS) $(LIBFT) -I $(INCLUDE) -I $(LIBFT_INCLUDE_DIR) -I $(UNIT_TESTS_INCLUDE_DIR)
+	@echo "${GREEN}${CHECK} ${YELLOW}${UNIT_TESTS}${GREEN} compiled successfully!${CLEAR}"
 
-bonus: $(OBJS_BONUS) $(LIBFT)
+$(CHECKER): $(OBJS_BONUS) $(LIBFT)
+	@echo $(SEPARATOR)
+	@echo "${ORANGE}${ARROW} Compiling ${YELLOW}${CHECKER}${ORANGE}...${CLEAR}"
 	cc $(FLAGS) $(OBJS_BONUS) -o $(CHECKER) $(LIBFT) -I $(INCLUDE) -I $(LIBFT_INCLUDE_DIR)
+	@echo "${GREEN}${CHECK} ${YELLOW}${CHECKER}${GREEN} compiled successfully!${CLEAR}" 
 
 re: fclean all
 
