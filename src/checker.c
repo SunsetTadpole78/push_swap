@@ -6,7 +6,7 @@
 /*   By: lroussel <lroussel@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2025/01/13 10:07:09 by lroussel		  #+#	#+#			 */
-/*   Updated: 2025/01/13 15:45:14 by lroussel         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:57:56 by lroussel         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	on_command(t_game *game, char *command)
 		sa(game);
 	else if (ft_strncmp(command, "sb\n", 3) == 0)
 		sb(game);
+	else if (ft_strncmp(command, "ss\n", 3) == 0)
+		ss(game);
 	else
 		return (0);
 	return (1);
