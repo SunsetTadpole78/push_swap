@@ -21,45 +21,45 @@ PUSH_SWAP = push_swap
 CHECKER = checker
 UNIT_TESTS = unit_tests
 
-DEFAULT =	calculator.c				\
-		push_swap.c				\
-		pile_parser.c				\
-		utils.c					\
+DEFAULT =	actions/push_ops.c 			\
+	 	actions/reverse_rotate_ops.c	 	\
+	 	actions/rotate_ops.c 			\
+	 	actions/swap_ops.c 			\
 		algorithm.c				\
+		calculator.c				\
+		pile_parser.c				\
+		push_swap.c				\
 		stack_operations.c			\
 		stack_utils.c				\
-	 	actions/push_ops.c 			\
+	 	type.c					\
+		utils.c
+BONUS =		actions/push_ops.c 			\
 	 	actions/reverse_rotate_ops.c	 	\
 	 	actions/rotate_ops.c 			\
 	 	actions/swap_ops.c 			\
-	 	type.c
-BONUS =	checker.c	\
-		utils.c					\
+		checker.c				\
+		pile_parser.c				\
 		stack_utils.c				\
-	 	actions/push_ops.c 			\
-	 	actions/reverse_rotate_ops.c	 	\
-	 	actions/rotate_ops.c 			\
-	 	actions/swap_ops.c 			\
-	pile_parser.c					\
-	 	type.c
+	 	type.c					\
+		utils.c
 
 FILES = $(addprefix $(SRC)/, $(DEFAULT))
 FILES_BONUS = $(addprefix $(SRC)/, $(BONUS))
-FILES_TESTS =	src/pile_parser.c			\
-		src/type.c				\
-		src/utils.c				\
-		src/actions/push_ops.c			\
+FILES_TESTS =	src/actions/push_ops.c			\
 		src/actions/reverse_rotate_ops.c	\
 		src/actions/rotate_ops.c		\
 		src/actions/swap_ops.c			\
-		tests/color.c				\
-		tests/stack_initializer.c		\
-		tests/tester.c				\
-		tests/utils.c				\
+		src/pile_parser.c			\
+		src/type.c				\
+		src/utils.c				\
 		tests/actions/push_tests.c		\
 		tests/actions/reverse_rotate_tests.c	\
 		tests/actions/rotate_tests.c		\
-		tests/actions/swap_tests.c
+		tests/actions/swap_tests.c		\
+		tests/color.c				\
+		tests/stack_initializer.c		\
+		tests/tester.c				\
+		tests/utils.c
 
 OBJS = $(FILES:%.c=%.o)
 OBJS_BONUS = $(FILES_BONUS:%.c=%.o)
